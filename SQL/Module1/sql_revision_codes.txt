@@ -1,0 +1,149 @@
+SELECT * FROM employees;
+SELECT COUNT(*) FROM employees;
+-- OR
+SELECT COUNT(*) AS countRows FROM employees;
+
+SELECT COUNT(name), COUNT(comm) FROM employees;
+-- and 
+SELECT COUNT(name) AS countName, COUNT(comm) AS countComm FROM employees;
+
+-- unique values of a columns - DISTINCT
+SELECT DISTINCT job FROM employees;
+
+-- or 
+SELECT DISTINCT job AS uniqueJObs FROM employees;
+
+-- number of unique values in a COLUMN
+
+SELECT COUNT(DISTINCT job) FROM employees;
+
+-- filtering the DATA
+SELECT * FROM employees WHERE sal >50000;
+
+SELECT * FROM employees WHERE sal >50000 LIMIT 3;
+
+SELECT * FROM Employees WHERE sal >50000 LIMIT 2 OFFSET 2;
+
+-- COMBINDINF Multiple condition to filert the DATA
+-- or operator
+SELECT * FROM employees WHERE sal > 60000 OR dept = 3;
+
+-- AND OPERATOR
+SELECT * FROM employees where sal > 30000 and dept =2;
+
+-- filtering those indivual theri salray in the range of 40000 to 60000?
+SELECT * FROM employees WHERE sal > 40000 AND sal < 60000;
+
+SELECT * FROM employees WHERE sal > 40000 AND sal < 60000 OR dept = 3;
+
+-- BETWEEN OPERATOR
+SELECT * FROM employees WHERE sal BETWEEN 40000 AND 60000;
+
+-- number of thoses indivalus their salry in BETWEEN 30000 to 55000
+SELECT COUNT(*) FROM employees WHERE sal BETWEEN 30000 AND 55000;
+
+-- OR
+SELECT COUNT(*) AS NumberOfEmpl FROM employees WHERE sal BETWEEN 30000 AND 55000;
+
+--  Filtering the text data
+
+SELECT * FROM employees WHERE name LIKE 'J%';
+
+
+-- with multiple conditions
+SELECT * FROM employees WHERE name LIKE 'J%' or name like 'H%';
+
+-- counting number of indivuals their names is "H", "W" and "K"
+
+SELECT COUNT(*) FROM employees WHERE NAME LIKE 'H%' OR NAME LIKE 'K%' OR NAME LIKE 'W%';
+
+-- _ WLID CARD
+SELECT * FROM employees WHERE NAME LIKE 'H_';
+
+SELECT * FROM employees WHERE NAME LIKE 'HOOVE_';
+
+SELECT * FROM employees WHERE NAME LIKE 'HOOV_R';
+
+
+-- IN OPERATOR
+SELECT * FROM employees WHERE dept IN (2,3);
+-- OR
+
+SELECT * FROM employees WHERE dept = 2 or dept =3;
+
+-- OR
+Select * from employees WHERE dept like 2 or dept like 3;
+
+-- OR
+SELECT * FROM employees WHERE dept between 2 and 3;
+
+-- Handling missing VALUES
+-- is NULL
+SELECT * FROM employees WHERE comm IS NULL;
+
+SELECT * FROM employees WHERE comm IS NULL LIMIT 4;
+
+SELECT * FROM employees WHERE comm IS NULL LIMIT 3 OFFSET 2;
+
+-- IS NOT NULL
+SELECT * FROM employees WHERE comm IS NOT NULL;
+
+-- COUNT the number of missing value??
+SELECT count(*) FROM employees WHERE comm IS NULL;
+
+SELECT count(*) as numberOfComm FROM employees WHERE comm IS NULL;
+
+SELECT count(comm) as numberOfComm, count(mgr) as numberOfMgr FROM employees WHERE comm IS NULL;
+
+
+
+-- OR
+SELECT * FROM employees WHERE dept BETWEEN 2 and 3;
+
+
+-- sorting the numeric data ORDER BY
+SELECT * FROM employees ORDER BY  sal;
+
+-- OR 
+SELECT * FROM employees ORDER BY sal ASC;
+
+-- SORTING the in descdening orer
+SELECT * FROM employees ORDER BY sal DESC;
+
+-- WE can also sort our base based on multiple columns
+SELECT * FROM employees ORDER BY sal, dept;
+
+
+SELECT * FROM employees ORDER BY sal DESC, dept ASC;
+
+SELECT * FROM employees ORDER BY sal DESC, dept DESC;
+
+-- TOP 5 hightest paid employees
+SELECT name FROM employees ORDER BY sal DESC LIMIT  5;
+
+SELECT name, job FROM employees ORDER BY sal DESC LIMIT  5;
+
+
+--  TOP 5 LOWERST piad employees
+SELECT name FROM employees ORDER BY sal ASC LIMIT  5;
+ 
+ 
+
+  SELECT name, job FROM employees ORDER BY sal ASC LIMIT  5;
+
+-- group by 
+
+SELECT job, SUM(sal) FROM employees GROUP BY job;
+
+SELECT job, max(sal) FROM employees GROUP BY job;
+
+-- MIMIUM VALUES
+
+SELECT job, min(sal) FROM employees GROUP BY job;
+
+-- AVERGGE DEPARMENT AND job
+SELECT DEP, avg(sal) FROM employees GROUP BY job;
+
+SELECT dept, SUM(sal) FROM employees GROUP BY dept;
+
+SELECT dept, avg(sal) FROM employees GROUP BY dept;
